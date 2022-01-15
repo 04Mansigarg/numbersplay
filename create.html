@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create</title>
+    <style>
+        body{
+            background-color: black;
+        }
+        th,td,tr{
+            border: 2px solid black;
+        }
+        @media screen and (max-width:2000px) {
+            .div{
+            border: 2px solid white;
+            width: 50%;
+            height: 50vh;
+            background-color: white;
+            margin: auto;
+        }
+        table{
+            background-color: white;
+            margin-top: 5em;
+        }
+        h1{
+            text-align: center;
+        }
+        label{
+            margin-left: 2em;
+            margin-top: 5%;
+            font-weight: bold;
+        }
+        #sno{
+            margin-left: 20%;
+        }
+        #emp{
+            margin-left: 8%;
+        }
+        #sales1{
+            margin-left: 17.5%;
+        }
+        #sales2{
+            margin-left: 17.5%;
+        }
+        #submit{
+            text-align: center;
+            width: 30%;
+            margin-left: 25%;
+            font-weight: bold;
+            background-color: black;
+            color: cadetblue;
+            border-radius: 4px;
+        }
+        select{
+            margin-left: 12%;
+        }
+        @media screen and (max-width:1200px) {
+            .div{
+            border: 2px solid white;
+            width: 50%;
+            height: 50vh;
+            background-color: white;
+            margin: auto;
+        }
+        table{
+            background-color: white;
+            margin-top: 5em;
+        }
+        h1{
+            text-align: center;
+        }
+        label{
+            margin-left: 1em;
+            margin-top: 5%;
+            font-weight: bold;
+        }
+        #sno{
+            margin-left: 25.5%;
+        }
+        #emp{
+            margin-left: 1%;
+        }
+        #sales1{
+            margin-left: 21.5%;
+        }
+        #sales2{
+            margin-left: 21.5%;
+        }
+        #submit{
+            text-align: center;
+            width: 40%;
+            margin-left: 30%;
+            font-weight: bold;
+            background-color: black;
+            color: cadetblue;
+            border-radius: 4px;
+        }
+        select{
+            margin-left: 10%;
+        }
+            
+        }
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="div">
+    <h1>Employee Data</h1>
+    <form action="">
+        <label for="">S.No</label>
+        <input type="text" id="sno" placeholder="S.No"><br>
+        <br>
+        <label for="">Employee Name</label>
+        <input type="text" name="" id="emp" placeholder="Name of the employee"><br>
+        <br>
+        <label for="">Department</label>
+        <select name="" id="department" placeholder="Employee Department">
+            <option value="Marketing">Marketing</option>
+            <option value="Finance">Finance</option>
+            <option value="HR">Hr</option>
+            <option value="Sales">Sales</option>
+        </select><br>
+        <br>
+        <label for="">Sales 1</label>
+        <input type="number" name="" id="sales1" placeholder="Salesyear1"><br>
+        <br>
+        <label for="">Sales 2</label>
+        <input type="number" name="" id="sales2" placeholder="Salesyear2"><br>
+        <br>
+        <input type="submit" name="" id="submit"><br>
+    </form>
+    <div>
+
+    <div class= "div2">
+        <table>
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Employee Name</th>
+                    <th>Employee's Department</th>
+                    <th>Sales Year 1</th>
+                    <th>Sales Year 1</th>
+                    <th>Average Yearly Sales</th>
+                </tr>
+
+            </thead>
+            <tbody>
+
+            </tbody>
+            <tfoot>
+
+            </tfoot>
+        </table>
+    </div>
+    
+</body>
+</html>
+<script>
+    document.querySelector("form").addEventListener("submit",employeeList)
+    var matrix=[]
+    function employeeList(event){
+        event.preventDefault()
+        var sno=document.querySelector("#sno").value
+        var name=document.querySelector("#emp").value
+        var depart=document.querySelector("#department").value
+        var s1=document.querySelector("#sales1").value
+        var s2=document.querySelector("#sales2").value
+
+        var tr = document.createElement("tr")
+        var td1 = document.createElement("td")
+        td1.textContent=sno
+        var td2 = document.createElement("td")
+        td2.textContent=name
+        var td3 = document.createElement("td")
+        td3.textContent=depart
+        var td4 = document.createElement("td")
+        td4.textContent= +s1
+        var td5 = document.createElement("td")
+        td5.textContent= +s2
+        var sum = (+s1) + (+s2)
+        var td6= document.createElement("td")
+        td6.textContent= sum/2
+        var array = []
+        array.push(sno)
+        array.push(name)
+        array.push(depart)
+        array.push(+s1)
+        array.push(+s2)
+        array.push(sum/2)
+
+        matrix.push(array)
+
+        tr.append(td1,td2,td3,td4,td5,td6)
+        document.querySelector("tbody").append(tr)
+    }
+    console.log(document.querySelectorAll("tr"))
+    var tr1 = document.createElement("tr")
+
+    var button1 = document.createElement("Button")
+    button1.textContent= "Ascending"
+    var button2 = document.createElement("Button")
+    button2.textContent= "Decending"
+    tr1.append(button1,button2)
+    document.querySelector("tfoot").append(tr1)
+
+   button1.addEventListener("click" , accendingOrder)
+   function accendingOrder(){
+       matrix.sort(function(a,b){
+           return a[5]-b[5]
+       })
+       var row = (document.querySelectorAll("tr"))
+       console.log(row)
+       for(var i = 1 ; i<row.length-1;i++){
+           var child = row[i].childNodes
+           console.log(child)
+           for(var j = 1 ; j<child.length;j++){
+             child[j].textContent = matrix[i-1][j]
+             console.log(child[j])
+            }
+       }
+  
+      // console.log(matrix)
+   }
+   button2.addEventListener("click" , decendingOrder)
+   function decendingOrder(){
+       matrix.sort(function(a,b){
+           return b[4]-a[4]
+       })
+       var row = (document.querySelectorAll("tr"))
+       console.log(row)
+       for(var i = 1 ; i<row.length-1;i++){
+           var child = row[i].childNodes
+           console.log(child)
+           for(var j = 1 ; j<child.length;j++){
+             child[j].textContent = matrix[i-1][j]
+             console.log(child[j])
+            }
+       }
+   }
+  
+</script>
