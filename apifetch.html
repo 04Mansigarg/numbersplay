@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            column-gap: 1em;
+            row-gap: 1em;
+        }
+        img{
+            width: 100%;
+        }
+        #heading{
+            text-align: center;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-weight: bolder;
+        }
+        p{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+<body>
+    <div><h1 id="heading">Users Data</h1></div>
+    <div id="container"></div>
+    
+</body>
+</html>
+<script>
+    var url = "https://reqres.in/api/users"
+
+    var x = fetch(url)
+    .then(function(res){
+        console.log("res:",res)
+        return res.json()
+    })
+    .then(function(res){
+        appendProduct(res)
+    })
+    .catch(function(err){
+        console.log("err:",err)
+    })
+
+    function appendProduct(data){
+        console.log("data:",data)
+        var arr = data.data
+        console.log(arr)
+
+        arr.forEach(el => {
+            console.log("el:",el)
+
+        var div = document.createElement("div")
+        var id = document.createElement("p")
+        id.textContent= el.id
+        var img = document.createElement("img")
+        img.src=el.avatar
+        var email = document.createElement("p")
+        email.textContent= el.email
+        var name = document.createElement("p")
+        name.textContent= el.first_name + " " + el.last_name  
+        console.log(id,img,email,name)   
+        
+        div.append(img,id,name,email)
+
+        document.querySelector("#container").append(div)
+    });
+
+    }
+            
+       
+
+       
+
+</script>
