@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form submit</title>
+    <style>
+        body{
+            background-color: black;
+        }
+        @media screen and (max-width:2000px) {
+            div{
+            background-color: white;
+            border: 2px solid white;
+            width: 30%;
+            margin: auto;
+            margin-top: 20%;
+           padding-bottom: 1.5em;
+           
+        }
+        #h1{
+            text-align: center;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+         }
+        form{
+           display: grid;
+           grid-template-columns: 1fr 4fr;
+           row-gap: 2em;
+           margin-left: 2em;
+           margin-right: 2em;
+           font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+           
+        }
+        #submit{
+            margin-left: 7em;
+            width: 100%;
+            font-weight: bolder;
+            background-color: cadetblue;
+            border: 2px solid black;
+            border-radius: 4px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+        }
+        label{
+            font-weight: bold;
+            font-size: x-large;
+        }
+            
+        }
+
+        @media screen and (max-width:1000px) {
+            div{
+            background-color: white;
+            border: 2px solid white;
+            width: 55%;
+            margin: auto;
+            margin-top: 20%;
+           padding-bottom: 1.5em;
+           
+        }
+        #h1{
+            text-align: center;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+         }
+        form{
+           display: grid;
+           grid-template-columns: 1fr 4fr;
+           row-gap: 2em;
+           margin-left: 1em;
+           margin-right: 1em;
+           font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+           
+        }
+        #submit{
+            margin-left: 7em;
+            width: 100%;
+            font-weight: bolder;
+            background-color: cadetblue;
+            border: 2px solid black;
+            border-radius: 4px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+        }
+        label{
+            font-weight: bold;
+            font-size: x-large;
+        }
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="div">
+        <span id="span"><h1 id="h1"><u>Form</u></h1></span>
+        <form action="">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Enter your Name">
+            <input type="submit" id="submit">
+        </form>
+    </div>
+    
+</body>
+</html>
+<script>
+    document.querySelector("form").addEventListener("submit",alertMsg)
+
+    function alertMsg(event){
+        event.preventDefault()
+
+    
+        var name = event.target[0].value
+
+        if(name === ""){
+            alert("Enter Name")
+            return;
+        }
+        else{
+            alert("Hello" + " " + name)
+        }
+        
+
+        
+
+    }
+</script>
