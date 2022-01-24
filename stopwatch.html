@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <style>
+        body{
+            background-color: black;
+            text-align: center;
+            margin: auto;
+        }
+        #stopwatch {
+            display: flex;
+            flex-direction: row;
+            margin: auto;
+           justify-content: center;
+           margin-bottom: 3%;
+           margin-top: 10%;
+         
+
+        }
+
+        .timer_ {
+            height: 30px;
+            width: 40px;
+            color: white;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-weight: 550;
+            font-size: 25px;
+            margin: 4px;
+            
+
+        }
+
+        #minute,
+        #hour {
+            visibility: hidden;
+        }
+        button{
+            background-color: rgb(12, 202, 202);
+            margin: 4px;
+            width: 5em;
+            border: 2px solid white ;
+            height: 5vh;
+            font-size: 25px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        button:hover{
+            background-color: white;
+            border: 2px solid rgb(12, 202, 202);
+        }
+    </style>
+</head>
+
+<body>
+   <section class="section">
+    <div id="stopwatch">
+        <div id="hour" class="timer_"></div>
+        <div id="minute" class="timer_"></div>
+        <div id="second" class="timer_"></div>
+        <div id="millisecond" class="timer_">00</div>
+
+
+
+    </div>
+    <button id="start">Start</button>
+    <button id="pause">Pause</button>
+    <button id="reset">Reset</button>
+   </section>
+</body>
+
+</html>
+<script>
+    var start = document.getElementById("start").addEventListener("click", start_watch)
+    var pause = document.getElementById("pause").addEventListener("click", pause_watch)
+    var pause = document.getElementById("reset").addEventListener("click", reset_watch)
+    var millisecond = document.getElementById("millisecond")
+    var second = document.getElementById("second")
+    var minute = document.getElementById("minute")
+    var hour = document.getElementById("hour")
+    var ms = 0
+    var s = 0
+    var m = 0
+    var h = 0
+    var stopwatch
+    function start_watch() {
+         stopwatch = setInterval(() => {
+            ms++
+            millisecond.innerText = ms
+            if (ms === 100) {
+                if (s === 59) {
+                    m++
+                    if (m > 0) {
+                        minute.style.visibility = "visible"
+                        minute.innerText = `${time(m)}:`
+                    }
+                    s = 0
+                }
+                if (m === 59) {
+                    h++
+                    if (h > 0) {
+                        hour.style.visibility = "visible"
+                        hour.innerText = `${time(m)}:`
+                    }
+                    m = 0
+                }
+                s++
+
+                second.innerText = `${time(s)}:`
+                ms = 0
+
+            }
+            //console.log(h, m, s, timer)
+
+        }, 10);
+    }
+
+    function pause_watch(){
+        clearInterval(stopwatch)
+        console.log(1)
+    }
+    function reset_watch(){
+        clearInterval(stopwatch)
+        ms=0
+        s=0
+        h=0
+        m=0
+        millisecond.innerText = ms
+        second.innerText = s
+        minute.innerText = m
+        hour.innerText = h
+        
+    }
+
+
+    function time(num){
+        if(num<10){
+           num = `0${num}`
+        }
+        return num
+        
+    }
+</script>
