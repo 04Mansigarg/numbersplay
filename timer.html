@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <style>
+        body {
+            background-color: black;
+            text-align: center;
+            margin: auto;
+        }
+
+        .input_div {
+            margin: 2%;
+            color: white;
+
+        }
+
+        #timer {
+            display: flex;
+            flex-direction: row;
+            margin: auto;
+            justify-content: center;
+            margin-bottom: 3%;
+            margin-top: 2%;
+
+
+        }
+
+        .timer_ {
+            height: 30px;
+            width: 40px;
+            color: white;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-weight: 550;
+            font-size: 25px;
+            margin: 4px;
+
+
+        }
+
+        button {
+            background-color: rgb(12, 202, 202);
+            margin: 4px;
+            width: 5em;
+            border: 2px solid white;
+            height: 5vh;
+            font-size: 25px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        button:hover {
+            background-color: white;
+            border: 2px solid rgb(12, 202, 202);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="input_div">
+        <label for="">Hours</label>
+        <input type="number" name="" id="input_hour">
+        <label for="">Minutes</label>
+        <input type="number" name="" id="input_minute">
+        <label for="">Seconds</label>
+        <input type="number" name="" id="input_second">
+    </div>
+    <div id="timer">
+        <div id="hour" class="timer_"></div>
+        <div id="minute" class="timer_"></div>
+        <div id="second" class="timer_"></div>
+    </div>
+    <div>
+        <button id="start">Start</button>
+        <button id="pause">Pause</button>
+        <button id="reset">Reset</button>
+    </div>
+
+</body>
+
+</html>
+<script>
+    var button1 = document.getElementById("start").addEventListener("click", start_timer)
+    var button2 = document.getElementById("pause").addEventListener("click", pause_timer)
+    var button3 = document.getElementById("reset").addEventListener("click", reset_timer)
+    var hour_value = document.getElementById("hour")
+    var minute_value = document.getElementById("minute")
+    var second_value = document.getElementById("second")
+    var timer
+    var b_hour = 0
+    var b_min = 0
+    var b_sec = 0
+        
+        
+    function start_timer() {
+        var hour = document.getElementById("input_hour").value
+        var minute = document.getElementById("input_minute").value
+        var second = document.getElementById("input_second").value
+       
+        hour = +hour
+        minute = +minute
+        second = +second
+        if (minute < 1) {
+            minute_value.style
+        }
+        if (hour === "") {
+            hour = 0
+        }
+        if (minute === "") {
+            minute = 0
+        }
+        if (second === "") {
+            second = 0
+        }
+        // variables for reset function
+        b_hour=hour
+        b_min=minute
+        b_sec=second
+        // to show on browser
+        hour_value.innerText=`${time(hour)}:`
+        minute_value.innerText=`${time(minute)}:`
+        second_value.innerText=`${time(second)}`
+
+        // variable to change the time
+
+        var s = second
+        var m = minute
+        var h = hour
+        console.log(s, m, h)
+        // setinterval function
+       timer= setInterval(() => {
+
+            if (s > 0) {
+                s--
+            }
+
+            if (s === 0) {
+                if (m > 0) {
+                    m--
+                    minute_value.innerText = `${time(m)}:`
+                    s = 59
+                }
+                if (m === 0 && s === 0) {
+                    if (h > 0) {
+                        h--
+                        hour_value.innerText = `${time(h)}:`
+                        m = 59
+                        minute_value.innerText = `${time(m)}:`
+                        s=59
+                        second_value.innerText = `${time(s)}`
+
+                    }
+                }
+            }
+            second_value.innerText = `${time(s)}`
+
+            console.log(s)
+
+
+        }, 1000);
+    }
+    function pause_timer(){
+        console.log(1)
+        clearInterval(timer)
+    }
+    function reset_timer(){
+        console.log(1)
+        clearInterval(timer)
+
+        hour_value.innerText=`${time(b_hour)}:`
+        minute_value.innerText=`${time(b_min)}:`
+        second_value.innerText=`${time(b_sec)}`
+       
+    }
+    function time(num) {
+        if (num < 10) {
+            num = `0${num}`
+        }
+        return num
+
+    }
+</script>
