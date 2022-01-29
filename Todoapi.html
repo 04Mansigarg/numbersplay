@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+            color: white;
+        }
+        #details{
+            width: 90%;
+            
+        }
+        button{
+            width: 10%;
+            background-color: turquoise;
+            border: 3px solid tomato;
+            height: 3em;
+        }
+        label{
+            font-size: 1.5em;
+        }
+        #content{
+            width: 60%;
+            border: 3px solid cadetblue;
+            margin: 2em;
+            text-align: center;
+            background-color: white;
+
+            
+
+        }
+    </style>
+</head>
+
+<body>
+   <div id="details">
+    <label for="">Title</label>
+    <input type="text" name="" id="title"><br>
+    <br>
+    <label for="">Status</label>
+    <input type="checkbox" id="status"><br>
+    <br>
+    <button id="add">Add</button>
+   </div>
+
+
+</body>
+
+</html>
+<script>
+
+    var button = document.querySelector("button").addEventListener("click", show_data)
+
+    function show_data() {
+        var title = document.querySelector("#title").value
+        var check_status = document.querySelector("#status")
+        if (check_status.checked) {
+            // console.log(true)
+            var status = true
+        }
+        else {
+            //console.log(false)
+            var status = false
+        }
+        var data = {
+            title: title,
+            status: status,
+            my_id: 4
+        }
+        console.log(data)
+
+        fetch("https://json-server-mocker-masai.herokuapp.com/tasks/", {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: { "Content-type": "application/json;charset=UTF-8" },
+        })
+            .then(function (res) {
+               // console.log("res:", res)
+                return res.json
+            })
+            .then(function (res) {
+                //console.log("result:", res)
+            })
+            .catch(function (err) {
+                console.log("err:", err)
+            })
+
+    fetch("https://json-server-mocker-masai.herokuapp.com/tasks/")
+    .then(function(res){
+        //console.log("res:",res)
+        res.json().then(function(data){
+          append_data(data)
+        })
+    })
+   
+    .catch(function(err){
+        console.log("err:",err)
+    })
+
+
+    }
+
+    function append_data(data){
+        //console.log(data.length)
+
+      for(let i = 0 ; i<data.length;i++){
+          var div = document.createElement("div")
+          div.id="content"
+          var title = document.createElement("h1")
+          console.log(1)
+         
+          
+          if(data[i].my_id === 4){
+            console.log(data[i])
+              if(data[i].status === true){
+                  title.style.color="green"
+              }
+              else{
+                  title.style.color="red"
+              }
+              title.innerText=data[i].title
+              div.append(title)
+              document.querySelector("body").append(div)
+          }
+         
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    // var data = {
+    //     title:"Buy vegetables",
+    //     status:true
+    // }
+    // fetch("https://json-server-mocker-masai.herokuapp.com/tasks/",{
+    //     method:"POST",
+    //     body:JSON.stringify(data),
+    //     headers: { "Content-type": "application/json;charset=UTF-8" },
+    // })
+    // .then(function(res){
+    //     console.log("res:",res)
+    //     return res.json
+    // })
+    // .then(function(res){
+    //     console.log("result:",res)
+    // })
+    // .catch(function(err){
+    //     console.log("err:",err)
+    // })
+
+    // fetch("https://json-server-mocker-masai.herokuapp.com/tasks/5",{
+    //     method:"DELETE",
+    //     // body:JSON.stringify(data),
+    //     headers: { "Content-type": "application/json;charset=UTF-8" },
+    // })
+    // .then(function(res){
+    //     console.log("res:",res)
+    //     return res.json
+    // })
+    // .then(function(res){
+    //     console.log("result:",res)
+    // })
+    // .catch(function(err){
+    //     console.log("err:",err)
+    // })
+
+
+</script>
