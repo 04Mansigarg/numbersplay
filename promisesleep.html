@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise</title>
+</head>
+<body>
+    <input type="text" name="" id="time" placeholder="Enter the time in milli second">
+    <button id="submit">Submit</button>
+    
+</body>
+</html>
+
+<script>
+       
+   
+   
+
+    let submit_data = ()=>{
+
+        let data = document.getElementById("time").value
+        data = +data
+        // console.log(data)
+        // console.log(isNaN(data))
+        let result ={
+                value:true,
+                message:"success"
+
+            }
+        let newpromise = new Promise (function(resolve,reject){
+            if(isNaN(data) === false){
+                resolve(result)
+
+                
+                
+            }else{
+                result.value= false,
+                result.message="invalid argument, promise accepts only valid numbers"
+                reject(result)
+                
+               
+            }
+           
+        })
+        .then((result)=>{
+            console.log(result)
+        })
+        .catch((result)=>{
+            console.log(result)
+        })
+            
+
+    }
+  
+    document.getElementById("submit").addEventListener("click",submit_data)
+ 
+    
+</script>
